@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,11 @@ Route::controller(AuthController::class)->group(
         Route::post('/logout', 'logout');
     }
 );
+
+Route::controller(MovieController::class)->group(
+    function () {
+        Route::post('/movies', 'store');
+    }
+);
+
+Route::get('/genres', [GenreController::class, 'index']);
