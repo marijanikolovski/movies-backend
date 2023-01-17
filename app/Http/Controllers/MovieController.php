@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMovieRequest;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MovieController extends Controller
 {
+    public function index()
+    {
+        $movies = Movie::with('genre')->latest()->get();
+
+        foreach ($movies as $movie) {
+            $movie['description'] = Str::limit($movie['description'], 50, ' ...');
+        }
+
+        return response()->json($movies);
+    }
+
     public function store(CreateMovieRequest $request)
     {
         $validated = $request->validated();
