@@ -34,6 +34,7 @@ Route::controller(MovieController::class)->group(
     function () {
         Route::get('/movies', 'index');
         Route::post('/movies', 'store');
+        Route::get('/movies/{id}', 'show');
     }
 );
 

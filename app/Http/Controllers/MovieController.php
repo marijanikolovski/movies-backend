@@ -28,4 +28,11 @@ class MovieController extends Controller
 
         return response()->json($movie, 201);
     }
+
+    public function show($id)
+    {
+        $movie = Movie::with('genre')->find($id);
+
+        return response()->json($movie);
+    }
 }
