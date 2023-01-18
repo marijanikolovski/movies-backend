@@ -9,9 +9,10 @@ use Illuminate\Support\Str;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::with('genre')->latest()->paginate(10);
+        $term = $request->query('term', '');
+        $movies = Movie::with('genre')->latest()->searchByTitle($term)->paginate(10);
 
         foreach ($movies as $movie) {
             $movie['description'] = Str::limit($movie['description'], 50, ' ...');

@@ -20,4 +20,12 @@ class Movie extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+
+    public static function scopeSearchByTitle($query, $term)
+    {
+        if (!$term) {
+            return $query;
+        }
+        return self::where('title', 'like', "%{$term}%");
+    }
 }
