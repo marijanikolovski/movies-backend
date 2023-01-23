@@ -21,11 +21,19 @@ class Movie extends Model
         return $this->belongsTo(Genre::class);
     }
 
-    public static function scopeSearchByTitle($query, $term)
+    public static function scopeSearchAndFilet($query, $term = "")
     {
+        $query->with('genre');
+
         if (!$term) {
             return $query;
         }
-        return self::where('title', 'like', "%{$term}%");
+
+        return self::where(function ($querry2) use ($term) {
+            $querry2->where('title', 'like', "%{$term}%")
+            ->orWhereHas('genre', function ($querry3) use ($term) {
+                $querry3->where('name', 'like', "%{$term}%");
+            });
+        });
     }
 }
