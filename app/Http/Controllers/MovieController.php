@@ -32,7 +32,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        $movie = Movie::with('genre')->find($id);
+        $movie = Movie::with('genre', 'votes')->find($id);
 
         return response()->json($movie);
     }

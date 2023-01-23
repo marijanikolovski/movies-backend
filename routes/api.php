@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\DislikeController;
+use App\Http\Controllers\VotesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,10 @@ Route::controller(MovieController::class)->group(
 );
 
 Route::get('/genres', [GenreController::class, 'index']);
+
+Route::controller(VotesController::class)->group(
+    function () {
+        Route::put('/movies/{id}/like', 'createLike');
+        Route::put('/movies/{id}/dislike', 'createDislike');
+    }
+);
