@@ -24,4 +24,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function getComments($movieId)
+    {
+        return self::where('movie_id', 'like', "%{$movieId}%")->get();
+    }
 }

@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
+    public function index($id)
+    {
+        $movie = Movie::find($id);
+
+        $comments = Comment::where('movie_id', 'like', "%{$movie->id}%")->latest()->paginate(5);
+
+        return response()->json($comments, 201);
+    }
+
     public function store($id, CreateCommentRequest $request)
     {
         $validated = $request->validated();
