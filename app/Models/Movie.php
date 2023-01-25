@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Movie extends Model
 {
@@ -21,6 +22,11 @@ class Movie extends Model
         return $this->belongsTo(Genre::class);
     }
 
+    public function votes()
+    {
+        return $this->hasMany(Votes::class);
+    }
+
     public static function scopeSearchAndFilet($query, $term = "")
     {
         $query->with('genre');
@@ -36,4 +42,17 @@ class Movie extends Model
             });
         });
     }
+
+    public static function isVotes($userId)
+    {
+
+        return self::whereHas('votes', function ($querry2) use ($userId) {
+            $querry2->where('user_id', 'like', "%{$userId}%");
+        });
+    }
+
+   /* public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
+    }*/
 }
