@@ -34,6 +34,8 @@ class MovieController extends Controller
     {
         $movie = Movie::with('genre', 'votes')->find($id);
 
+        $movie->increment('visits', 1);
+
         return response()->json($movie);
     }
 }
