@@ -8,6 +8,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\DislikeController;
 use App\Http\Controllers\VotesController;
+use App\Http\Controllers\WatchListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,5 +55,14 @@ Route::controller(CommentsController::class)->group(
     function () {
         Route::get('movies/{id}/comments', 'index');
         Route::post('movies/{id}/comments', 'store');
+    }
+);
+
+Route::controller(WatchListController::class)->group(
+    function () {
+        Route::get('watchlist', 'index');
+        Route::post('movies/{id}/watchlist', 'store');
+        Route::delete('watchlist/{id}', 'destroy');
+        Route::put('watchlist/{id}', 'update');
     }
 );
