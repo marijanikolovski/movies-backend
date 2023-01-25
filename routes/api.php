@@ -52,6 +52,7 @@ Route::controller(VotesController::class)->group(
 
 Route::controller(CommentsController::class)->group(
     function () {
+        Route::get('movies/{id}/comments', 'index');
         Route::post('movies/{id}/comments', 'store');
     }
 );
