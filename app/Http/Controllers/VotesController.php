@@ -15,7 +15,7 @@ class VotesController extends Controller
         $userId = Auth::id();
         $movie = Movie::with(['genre', 'votes'])->find($id);
 
-        if (Votes::glas($userId, $movie->id)->isEmpty()) {
+        if (Votes::voice($userId, $movie->id)->isEmpty()) {
             $movie->likes += 1;
             $movie->save();
 
@@ -44,7 +44,7 @@ class VotesController extends Controller
         $userId = Auth::id();
         $movie = Movie::with(['genre', 'votes'])->find($id);
 
-        if (Votes::glas($userId, $movie->id)->isEmpty()) {
+        if (Votes::voice($userId, $movie->id)->isEmpty()) {
             $movie = Movie::find($id);
             $movie->dislikes  += 1;
             $movie->save();

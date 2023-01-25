@@ -25,7 +25,7 @@ class Votes extends Model
         return $this->belongsTo(Movie::class);
     }
 
-    public static function glas($userId, $movieID)
+    public static function voice($userId, $movieID)
     {
         return self::where('user_id', 'like', "%{$userId}%")
             ->where('movie_id', 'like', "%{$movieID}%")
