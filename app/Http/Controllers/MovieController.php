@@ -12,7 +12,7 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $term = $request->query('term', '');
-        $movies = Movie::with('genre')->latest()->searchAndFilet($term)->paginate(10);
+        $movies = Movie::with('genre', 'watchLists')->latest()->searchAndFilet($term)->paginate(10);
 
         foreach ($movies as $movie) {
             $movie['description'] = Str::limit($movie['description'], 50, ' ...');
@@ -32,7 +32,7 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        $movie = Movie::with('genre', 'votes')->find($id);
+        $movie = Movie::with('genre', 'votes', 'watchLists')->find($id);
 
         $movie->increment('visits', 1);
 
