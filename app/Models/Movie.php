@@ -51,8 +51,8 @@ class Movie extends Model
         });
     }
 
-   /* public function dislikes()
+    public function comments()
     {
-        return $this->hasMany(Dislike::class);
-    }*/
+        return $this->hasMany(Comment::class);
+    }
 }

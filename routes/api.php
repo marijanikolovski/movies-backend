@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\DislikeController;
@@ -46,5 +47,11 @@ Route::controller(VotesController::class)->group(
     function () {
         Route::put('/movies/{id}/like', 'createLike');
         Route::put('/movies/{id}/dislike', 'createDislike');
+    }
+);
+
+Route::controller(CommentsController::class)->group(
+    function () {
+        Route::post('movies/{id}/comments', 'store');
     }
 );
