@@ -65,4 +65,11 @@ class Movie extends Model
     {
         return Movie::orderByDesc('likes')->limit(10)->get();
     }
+
+    public static function getRelatedMovies($genreId, $movieId)
+    {
+        return Movie::where('genre_id', 'like', "%{$genreId}%")
+        ->where('id', 'not like', "%{$movieId}%")
+        ->limit(10)->get();
+    }
 }
