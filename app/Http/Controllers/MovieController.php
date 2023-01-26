@@ -38,4 +38,11 @@ class MovieController extends Controller
 
         return response()->json($movie);
     }
+
+    public function showTopMovies()
+    {
+        $popularMovies = Movie::getTopMovies();
+
+        return response()->json($popularMovies);
+    }
 }
