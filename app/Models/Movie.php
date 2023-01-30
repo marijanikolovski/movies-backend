@@ -60,4 +60,9 @@ class Movie extends Model
     {
         return $this->hasMany(WatchList::class);
     }
+
+    public static function getTopMovies()
+    {
+        return Movie::orderByDesc('likes')->limit(10)->get();
+    }
 }
