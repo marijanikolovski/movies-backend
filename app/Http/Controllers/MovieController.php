@@ -45,4 +45,13 @@ class MovieController extends Controller
 
         return response()->json($popularMovies);
     }
+
+    public function showRelatedMovies($id)
+    {
+        $movie = Movie::with('genre')->find($id);
+
+        $relatedMovies = Movie::getRelatedMovies($movie->genre_id, $id);
+
+        return response()->json($relatedMovies);
+    }
 }
