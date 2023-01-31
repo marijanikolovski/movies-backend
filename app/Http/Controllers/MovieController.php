@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MovieCreatedEvent;
 use App\Http\Requests\CreateMovieRequest;
 use App\Models\Movie;
+use App\Mail\MovieCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class MovieController extends Controller
 {
