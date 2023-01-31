@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MovieCreatedEvent;
 use App\Http\Requests\CreateMovieRequest;
 use App\Models\Movie;
 use App\Mail\MovieCreated;
@@ -28,8 +29,6 @@ class MovieController extends Controller
         $validated = $request->validated();
 
         $movie = Movie::create($validated);
-
-        Mail::to(auth()->user())->send(new MovieCreated($movie));
 
         return response()->json($movie, 201);
     }

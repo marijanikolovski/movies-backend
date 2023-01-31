@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\MovieCreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -72,4 +73,8 @@ class Movie extends Model
         ->where('id', 'not like', "%{$movieId}%")
         ->limit(10)->get();
     }
+
+    protected $dispatchesEvents = [
+        'created' => MovieCreatedEvent::class,
+    ];
 }
