@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MovieCreated;
 use App\Events\MovieCreatedEvent;
+use Exception;
 
 class SendEmailJob implements ShouldQueue
 {
